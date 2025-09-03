@@ -303,20 +303,62 @@ footer { text-align:center; padding:10px; color:#333; font-weight:bold; font-siz
 
 <footer>تصميم : أ.ضيف الله الطويرقي 0543559220</footer>
 
+<!-- أكمل باقي الكود كما هو قبل التعديلات -->
+
 <script>
 let uploadedImages = {};
+
+// استدعاء التواريخ
+setTimeout(()=>{
+  document.querySelectorAll('.date').forEach(el=>{
+    flatpickr(el,{ locale:'ar', dateFormat:"d-m-Y", altInput:true, altFormat:"d-m-Y" });
+  });
+},500);
 
 function openTab(tabId, evt){
   document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
   document.querySelectorAll('.tab-button').forEach(el=>el.classList.remove('active'));
   document.getElementById(tabId).classList.add('active');
   if(evt) evt.currentTarget.classList.add('active');
+  loadForm(tabId);
 }
 
+// حفظ البيانات تلقائياً عند تغيير أي حقل
+function saveForm(tabId){
+  const tab = document.getElementById(tabId);
+  const data = {};
+  tab.querySelectorAll('input[type="text"]').forEach(input=>{
+    const key = input.previousElementSibling ? input.previousElementSibling.textContent : input.name;
+    data[key] = input.value;
+  });
+  localStorage.setItem(tabId+'-form', JSON.stringify(data));
+}
+
+// تحميل البيانات من التخزين
+function loadForm(tabId){
+  const tab = document.getElementById(tabId);
+  const data = JSON.parse(localStorage.getItem(tabId+'-form')||'{}');
+  tab.querySelectorAll('input[type="text"]').forEach(input=>{
+    const key = input.previousElementSibling ? input.previousElementSibling.textContent : input.name;
+    if(data[key]) input.value = data[key];
+  });
+}
+
+// مسح البيانات
+function clearForm(tabId){
+  const tab = document.getElementById(tabId);
+  tab.querySelectorAll('input[type="text"]').forEach(input=>input.value='');
+  localStorage.removeItem(tabId+'-form');
+  uploadedImages[tabId] = [];
+  updateCounter(tabId);
+  renderPreview(tabId);
+}
+
+// رفع الصور وعرضها
 function storeImages(event){
   const tabId = event.target.closest('.tab-content').id;
   const files = event.target.files;
-  if(!uploadedImages[tabId]) uploadedImages[tabId] = [];
+  if(!uploadedImages[tabId]) uploadedImages[tabId]=[];
   if(uploadedImages[tabId].length + files.length > 4){
     alert("مسموح برفع 4 صور فقط لكل تقرير.");
     event.target.value = "";
@@ -324,16 +366,68 @@ function storeImages(event){
   }
   for(let i=0;i<files.length;i++){
     const reader = new FileReader();
-    reader.onload = function(e){ uploadedImages[tabId].push(e.target.result); }
+    reader.onload = function(e){
+      uploadedImages[tabId].push(e.target.result);
+      updateCounter(tabId);
+      renderPreview(tabId);
+      saveForm(tabId);
+    }
     reader.readAsDataURL(files[i]);
   }
 }
 
-setTimeout(()=>{
-  document.querySelectorAll('.date').forEach(el=>{
-    flatpickr(el,{ locale:'ar', dateFormat:"d-m-Y", altInput:true, altFormat:"d-m-Y" });
+// عداد الصور
+function updateCounter(tabId){
+  const tab = document.getElementById(tabId);
+  const counter = tab.querySelector('.counter');
+  if(counter){
+    counter.textContent = `عدد الصور المرفوعة: ${uploadedImages[tabId]?.length||0} / 4`;
+    counter.style.color = (uploadedImages[tabId]?.length >= 4) ? 'red' : '#5b3a29';
+  }
+}
+
+// عرض الصور المرفوعة
+function renderPreview(tabId){
+  const tab = document.getElementById(tabId);
+  const preview = tab.querySelector('.preview');
+  preview.innerHTML = '';
+  (uploadedImages[tabId]||[]).forEach((src,index)=>{
+    const container = document.createElement('div');
+    container.style.position = 'relative';
+    const img = document.createElement('img');
+    img.src = src;
+    img.style.width='70px'; img.style.height='70px'; img.style.objectFit='cover'; img.style.border='1px solid #ccc'; img.style.borderRadius='4px';
+    const btn = document.createElement('button');
+    btn.textContent='❌'; 
+    btn.style.position='absolute'; btn.style.top='-5px'; btn.style.right='-5px'; 
+    btn.style.background='red'; btn.style.color='white'; btn.style.border='none'; 
+    btn.style.borderRadius='50%'; btn.style.cursor='pointer'; btn.style.fontSize='10px';
+    btn.onclick=()=>{ uploadedImages[tabId].splice(index,1); updateCounter(tabId); renderPreview(tabId); saveForm(tabId); };
+    container.appendChild(img); container.appendChild(btn);
+    preview.appendChild(container);
   });
-},500);
+}
+
+// إضافة زر حذف البيانات بعد زر الطباعة تلقائياً
+document.querySelectorAll('.tab-content').forEach(tab=>{
+  const clearBtn = document.createElement('button');
+  clearBtn.textContent='حذف البيانات';
+  clearBtn.style.background='red';
+  clearBtn.style.color='white';
+  clearBtn.style.marginTop='5px';
+  clearBtn.style.fontWeight='bold';
+  clearBtn.style.width='100%';
+  clearBtn.onclick = ()=> clearForm(tab.id);
+  tab.appendChild(clearBtn);
+
+  // حفظ تلقائي عند تعديل أي حقل
+  tab.querySelectorAll('input[type="text"]').forEach(input=>{
+    input.addEventListener('input',()=>saveForm(tab.id));
+  });
+
+  // تحميل البيانات عند بدء التشغيل
+  loadForm(tab.id);
+});
 
 function printPDF(btn){
   const tabContent = btn.closest('.tab-content');
@@ -341,50 +435,26 @@ function printPDF(btn){
   const content = tabContent.cloneNode(true);
   content.querySelectorAll('button,input[type="file"],.counter,.preview').forEach(el=>el.remove());
 
-  const programInput = content.querySelector('input[type="text"]:nth-of-type(4)');
-  let programName = programInput ? programInput.value : '';
-  if(programName){
-    const titleEl = document.createElement('div');
-    titleEl.textContent = programName;
-    titleEl.style.fontSize = "24px";
-    titleEl.style.fontWeight = "bold";
-    titleEl.style.textAlign = "center";
-    titleEl.style.marginBottom = "10px";
-    content.insertBefore(titleEl, content.firstChild);
-  }
-
   const wrapper = document.createElement('div');
   wrapper.style.position='relative';
   wrapper.style.width='210mm';
   wrapper.style.height='296.5mm';
-  wrapper.style.padding='60mm 10mm 20mm 10mm';
+  wrapper.style.padding='13mm 10mm 20mm 10mm';
   wrapper.style.boxSizing='border-box';
   wrapper.style.overflow='hidden';
-  wrapper.style.backgroundImage = 'url("images/background.png")';
-  wrapper.style.backgroundSize = 'cover';
-  wrapper.style.backgroundRepeat = 'no-repeat';
-  wrapper.style.backgroundPosition = 'center';
   wrapper.appendChild(content);
 
   const tabImages = uploadedImages[tabId] || [];
-  if (tabImages.length > 0) {
+  if(tabImages.length>0){
     const imagesWrapper = document.createElement('div');
-    imagesWrapper.style.display = 'flex';
-    imagesWrapper.style.flexWrap = 'wrap';
-    imagesWrapper.style.justifyContent = 'center';
-    imagesWrapper.style.gap = '5px';
-    imagesWrapper.style.margin = '15px 0';
-    tabImages.forEach(src => {
+    imagesWrapper.style.display='flex'; imagesWrapper.style.flexWrap='wrap'; imagesWrapper.style.justifyContent='center'; imagesWrapper.style.gap='5px';
+    tabImages.forEach(src=>{
       const img = document.createElement('img');
-      img.src = src;
-      img.style.width = '150px';
-      img.style.height = '150px';
-      img.style.objectFit = 'cover';
+      img.src=src;
+      img.style.width='150px'; img.style.height='150px'; img.style.objectFit='cover';
       imagesWrapper.appendChild(img);
     });
-    const activityDiv = Array.from(content.querySelectorAll('div'))
-      .find(div => div.innerHTML.includes('رائدة النشاط'));
-    if (activityDiv) { content.insertBefore(imagesWrapper, activityDiv); }
+    content.appendChild(imagesWrapper);
   }
 
   html2pdf().set({
