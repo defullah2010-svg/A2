@@ -14,102 +14,29 @@
 @font-face {
   font-family: 'HelveticaNeueW23';
   src: url('fonts/HelveticaNeueW23-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
-
 body, input, label, button, header, footer {
   font-family: 'HelveticaNeueW23', Arial, sans-serif;
   margin:0;
   padding:0;
   background:#f9f9f9;
 }
-
-header { background:#15445A; color:white; text-align:center; padding:12px; }
+header { background:#15445a; color:white; text-align:center; padding:12px; }
 header h1 { margin:0; font-size:18px; }
-
-.tabs { display:grid; grid-template-columns:repeat(2,1fr); background:#3d7eb9; }
-.tab-button { padding:10px; cursor:pointer; text-align:center; background:#3d7eb9; color:white; border:none; font-size:14px; font-weight:bold; }
-.tab-button.active { background:#0da9a6; }
-
+.tabs { display:grid; grid-template-columns:repeat(2,1fr); background:#c1b48a; }
+.tab-button { padding:10px; cursor:pointer; text-align:center; background:#c1b48a; color:white; border:none; font-size:14px; font-weight:bold; }
+.tab-button.active { background:#b36b3f; }
 .tab-content { display:none; padding:15px; background:none; }
 .tab-content.active { display:block; }
-
-label {
-  display:block;
-  margin:5px 0 2px;
-  font-weight:bold;
-  font-size:12px;
-  background:transparent;
-  text-align:center;
-}
-
-input {
-  width:100%;
-  padding:4px;
-  border:1px solid #b8b8b8;
-  border-radius:4px;
-  margin-bottom:5px;
-  box-sizing:border-box;
-  font-size:12px;
-  text-align:center;
-  background:transparent;
-}
-
-button { 
-  background:#0da9a6; 
-  color:white; 
-  border:none; 
-  padding:8px 10px; 
-  margin:5px 0; 
-  cursor:pointer; 
-  border-radius:6px; 
-  width:100%; 
-  font-size:14px; 
-  font-weight:bold; 
-}
-
-footer { 
-  text-align:center; 
-  padding:10px; 
-  color:#333; 
-  font-weight:bold; 
-  font-size:12px; 
-  background:#f1f1f1;
-}
-
-.preview img {
-  max-width:100px;
-  max-height:100px;
-  object-fit:cover;
-  margin:2px;
-  border:1px solid #aaa;
-  border-radius:4px;
-}
-
-.preview .img-wrapper {
-  position:relative;
-  display:inline-block;
-}
-
-.preview .img-wrapper button {
-  position:absolute;
-  top:0;
-  right:0;
-  background:red;
-  border:none;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-  border-radius:50%;
-  width:18px;
-  height:18px;
-  font-size:12px;
-  line-height:14px;
-  padding:0;
-}
-
+label { display:block; margin:5px 0 2px; font-weight:bold; font-size:12px; background:transparent; text-align:center; }
+input { width:100%; padding:4px; border:1px solid #c2c1c1; border-radius:4px; margin-bottom:5px; box-sizing:border-box; font-size:12px; text-align:center; background:transparent; }
+button { background:#b36b3f; color:white; border:none; padding:8px 10px; margin:5px 0; cursor:pointer; border-radius:6px; width:100%; font-size:14px; font-weight:bold; }
+footer { text-align:center; padding:10px; color:#333; font-weight:bold; font-size:12px; background:#f1f1f1; }
 @media print {
   @page { size: A4 portrait; margin: 0; }
-  body { width: 210mm; height: 297mm; margin:0; background:none !important; }
+  body { width: 210mm; height: 297mm; margin:0; background:none !important; font-family: 'HelveticaNeueW23', Arial, sans-serif; }
   .tab-content { display:block !important; }
   button, .tab-button, .tabs, footer { display:none !important; }
   label { font-size: 14px !important; font-weight: bold; }
@@ -125,16 +52,16 @@ footer {
 </header>
 
 <div class="tabs">
-  <button class="tab-button active" onclick="openTab('culture', event)">مجال المواطنة و الحياة</button>
-  <button class="tab-button" onclick="openTab('science', event)">مجال الثقافة و الفنون</button>
-  <button class="tab-button" onclick="openTab('sports', event)">مجال الرياضة و الصحة</button>
-  <button class="tab-button" onclick="openTab('scout', event)">مجال العلوم و التقنية</button>
-  <button class="tab-button" onclick="openTab('family', event)">مجال النشاط الكشفي</button>
-  <button class="tab-button" onclick="openTab('skills', event)">مجال الأيام و المناسبات</button>
+ <button class="tab-button active" onclick="openTab('culture', event)">مجال المواطنة و الحياة</button>
+ <button class="tab-button" onclick="openTab('science', event)">مجال الثقافة و الفنون</button>
+ <button class="tab-button" onclick="openTab('sports', event)">مجال الرياضة و الصحة</button>
+ <button class="tab-button" onclick="openTab('scout', event)">مجال العلوم و التقنية</button>
+ <button class="tab-button" onclick="openTab('family', event)">مجال النشاط الكشفي</button>
+ <button class="tab-button" onclick="openTab('skills', event)">مجال الأيام و المناسبات</button>
 </div>
 
-<!-- تبويبات -->
-<!-- لكل تبويب نفس الهيكل، سأضع تبويب واحد مثال (culture)، ويمكن تكراره للتبويبات الأخرى -->
+<!-- ===== تبويبات الستة ===== -->
+<!-- تبويب مجال المواطنة و الحياة -->
 <div id="culture" class="tab-content active">
   <label style="font-size:16px; font-weight:bold; text-align:center;">مجال المواطنة و الحياة</label>
   <div style="display:flex; gap:10px; justify-content:center; margin-bottom:10px;">
@@ -152,12 +79,11 @@ footer {
     <div><label>اليوم</label><input type="text"></div>
     <div><label>التاريخ</label><input type="text" class="date"></div>
   </div>
-  <label>اسم البرنامج</label>
-  <input type="text">
+  <label>اسم البرنامج</label><input type="text">
   <label>أهداف البرنامج</label>
   <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:5px;">
-      <input type="text"><input type="text">
-      <input type="text"><input type="text">
+    <input type="text"><input type="text">
+    <input type="text"><input type="text">
   </div>
   <label>الأثر الإيجابي للبرنامج</label>
   <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:5px;">
@@ -175,7 +101,7 @@ footer {
   <button onclick="printPDF(this)">طباعة التقرير</button>
 </div>
 
-<!-- العلم والتقنية -->
+<!-- تبويب مجال الثقافة و الفنون -->
 <div id="science" class="tab-content">
   <label style="font-size:16px; font-weight:bold; text-align:center;">مجال الثقافة و الفنون</label>
   <div style="display:flex; gap:10px; justify-content:center; margin-bottom:10px;">
@@ -204,7 +130,8 @@ footer {
     <input type="text"><input type="text">
     <input type="text"><input type="text">
   </div>
-  <label>الشواهد</label><input type="file" multiple accept="image/*" onchange="storeImages(event)">
+  <label>الشواهد</label>
+  <input type="file" multiple accept="image/*" onchange="storeImages(event)">
   <div class="counter" style="font-size:12px; color:#5b3a29; font-weight:bold;"></div>
   <div class="preview" style="display:flex; gap:5px; flex-wrap:wrap; margin-top:5px;"></div>
   <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:5px; margin-top:10px;">
@@ -214,7 +141,7 @@ footer {
   <button onclick="printPDF(this)">طباعة التقرير</button>
 </div>
 
-<!-- التبويب الثالث: برنامج الرياضة والصحة -->
+<!-- تبويب مجال الرياضة و الصحة -->
 <div id="sports" class="tab-content">
   <label style="font-size:16px; font-weight:bold; text-align:center;">مجال الرياضة و الصحة</label>
   <div style="display:flex; gap:10px; justify-content:center; margin-bottom:10px;">
@@ -243,7 +170,8 @@ footer {
     <input type="text"><input type="text">
     <input type="text"><input type="text">
   </div>
-  <label>الشواهد</label><input type="file" multiple accept="image/*" onchange="storeImages(event)">
+  <label>الشواهد</label>
+  <input type="file" multiple accept="image/*" onchange="storeImages(event)">
   <div class="counter" style="font-size:12px; color:#5b3a29; font-weight:bold;"></div>
   <div class="preview" style="display:flex; gap:5px; flex-wrap:wrap; margin-top:5px;"></div>
   <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:5px; margin-top:10px;">
@@ -253,7 +181,7 @@ footer {
   <button onclick="printPDF(this)">طباعة التقرير</button>
 </div>
 
-<!-- التبويب الرابع: برنامج التربية الكشفية -->
+<!-- تبويب مجال العلوم و التقنية -->
 <div id="scout" class="tab-content">
   <label style="font-size:16px; font-weight:bold; text-align:center;">مجال العلوم و التقنية</label>
   <div style="display:flex; gap:10px; justify-content:center; margin-bottom:10px;">
@@ -282,7 +210,8 @@ footer {
     <input type="text"><input type="text">
     <input type="text"><input type="text">
   </div>
-  <label>الشواهد</label><input type="file" multiple accept="image/*" onchange="storeImages(event)">
+  <label>الشواهد</label>
+  <input type="file" multiple accept="image/*" onchange="storeImages(event)">
   <div class="counter" style="font-size:12px; color:#5b3a29; font-weight:bold;"></div>
   <div class="preview" style="display:flex; gap:5px; flex-wrap:wrap; margin-top:5px;"></div>
   <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:5px; margin-top:10px;">
@@ -292,7 +221,7 @@ footer {
   <button onclick="printPDF(this)">طباعة التقرير</button>
 </div>
 
-<!-- التبويب الخامس: برنامج الأسرة والمجتمع -->
+<!-- تبويب مجال النشاط الكشفي -->
 <div id="family" class="tab-content">
   <label style="font-size:16px; font-weight:bold; text-align:center;">مجال النشاط الكشفي</label>
   <div style="display:flex; gap:10px; justify-content:center; margin-bottom:10px;">
@@ -321,7 +250,8 @@ footer {
     <input type="text"><input type="text">
     <input type="text"><input type="text">
   </div>
-  <label>الشواهد</label><input type="file" multiple accept="image/*" onchange="storeImages(event)">
+  <label>الشواهد</label>
+  <input type="file" multiple accept="image/*" onchange="storeImages(event)">
   <div class="counter" style="font-size:12px; color:#5b3a29; font-weight:bold;"></div>
   <div class="preview" style="display:flex; gap:5px; flex-wrap:wrap; margin-top:5px;"></div>
   <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:5px; margin-top:10px;">
@@ -331,7 +261,7 @@ footer {
   <button onclick="printPDF(this)">طباعة التقرير</button>
 </div>
 
-<!-- التبويب السادس: برنامج مهارات الحياة -->
+<!-- تبويب مجال الأيام و المناسبات -->
 <div id="skills" class="tab-content">
   <label style="font-size:16px; font-weight:bold; text-align:center;">مجال الأيام و المناسبات</label>
   <div style="display:flex; gap:10px; justify-content:center; margin-bottom:10px;">
@@ -360,7 +290,8 @@ footer {
     <input type="text"><input type="text">
     <input type="text"><input type="text">
   </div>
-  <label>الشواهد</label><input type="file" multiple accept="image/*" onchange="storeImages(event)">
+  <label>الشواهد</label>
+  <input type="file" multiple accept="image/*" onchange="storeImages(event)">
   <div class="counter" style="font-size:12px; color:#5b3a29; font-weight:bold;"></div>
   <div class="preview" style="display:flex; gap:5px; flex-wrap:wrap; margin-top:5px;"></div>
   <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:5px; margin-top:10px;">
@@ -370,122 +301,203 @@ footer {
   <button onclick="printPDF(this)">طباعة التقرير</button>
 </div>
 
-<!-- يمكنك إضافة التبويبات الخمسة الأخرى بنفس الطريقة -->
-
 <footer>تصميم : أ.ضيف الله الطويرقي 0543559220</footer>
 
 <script>
-// حفظ واسترجاع الحقول
-function saveInputs(tabId) {
-  const tab = document.getElementById(tabId);
-  const data = {};
-  tab.querySelectorAll('input[type="text"]').forEach((input, index) => {
-    data[index] = input.value;
-  });
-  localStorage.setItem(tabId + '-inputs', JSON.stringify(data));
-}
+let uploadedImages = {};
 
-function loadInputs(tabId) {
-  const tab = document.getElementById(tabId);
-  const data = JSON.parse(localStorage.getItem(tabId + '-inputs') || '{}');
-  tab.querySelectorAll('input[type="text"]').forEach((input, index) => {
-    if (data[index]) input.value = data[index];
-  });
-}
-
-// التبديل بين التبويبات
-function openTab(tabId, evt) {
-  document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
-  document.querySelectorAll('.tab-button').forEach(tb => tb.classList.remove('active'));
+function openTab(tabId, evt){
+  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.tab-button').forEach(el=>el.classList.remove('active'));
   document.getElementById(tabId).classList.add('active');
-  evt.currentTarget.classList.add('active');
+  if(evt) evt.currentTarget.classList.add('active');
 }
 
-// إضافة زر مسح الحقول لكل تبويب
-document.querySelectorAll('.tab-content').forEach(tab => {
-  loadInputs(tab.id);
-  tab.querySelectorAll('input[type="text"]').forEach(input => {
-    input.addEventListener('input', () => saveInputs(tab.id));
-  });
+// حفظ الصور
+function storeImages(event){
+  const tabId = event.target.closest('.tab-content').id;
+  const files = event.target.files;
+  if(!uploadedImages[tabId]) uploadedImages[tabId] = [];
+  if(uploadedImages[tabId].length + files.length > 4){
+    alert("مسموح برفع 4 صور فقط لكل تقرير.");
+    event.target.value = "";
+    return;
+  }
+  for(let i=0;i<files.length;i++){
+    const reader = new FileReader();
+    reader.onload = function(e){ 
+      uploadedImages[tabId].push(e.target.result); 
+      updatePreview(tabId);
+      saveTabData(tabId); // حفظ تلقائي عند رفع الصور
+    }
+    reader.readAsDataURL(files[i]);
+  }
+}
 
-  const clearBtn = document.createElement('button');
-  clearBtn.textContent = "حذف البيانات";
-  clearBtn.style.background = "red";
-  clearBtn.style.marginTop = "5px";
-  clearBtn.onclick = () => {
-    tab.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
-    localStorage.removeItem(tab.id + '-inputs');
-    tab.querySelector('.preview').innerHTML = '';
-    tab.querySelector('.counter').textContent = '';
-  };
-  tab.appendChild(clearBtn);
+// عرض الصور في الصفحة مع إمكانية الحذف
+function updatePreview(tabId){
+  const tabContent = document.getElementById(tabId);
+  const previewDiv = tabContent.querySelector('.preview');
+  if(!previewDiv) return;
+  previewDiv.innerHTML = '';
+  (uploadedImages[tabId] || []).forEach((src,index)=>{
+    const imgWrapper = document.createElement('div');
+    imgWrapper.style.position = 'relative';
+    imgWrapper.style.display = 'inline-block';
+    imgWrapper.style.margin = '2px';
+    
+    const img = document.createElement('img');
+    img.src = src;
+    img.style.width='80px';
+    img.style.height='80px';
+    img.style.objectFit='cover';
+    imgWrapper.appendChild(img);
+    
+    const delBtn = document.createElement('button');
+    delBtn.textContent='×';
+    delBtn.style.position='absolute';
+    delBtn.style.top='-5px';
+    delBtn.style.right='-5px';
+    delBtn.style.background='red';
+    delBtn.style.color='white';
+    delBtn.style.border='none';
+    delBtn.style.borderRadius='50%';
+    delBtn.style.width='18px';
+    delBtn.style.height='18px';
+    delBtn.style.cursor='pointer';
+    delBtn.addEventListener('click',()=>{
+      uploadedImages[tabId].splice(index,1);
+      updatePreview(tabId);
+      saveTabData(tabId);
+    });
+    
+    imgWrapper.appendChild(delBtn);
+    previewDiv.appendChild(imgWrapper);
+  });
+}
+
+// حفظ البيانات في LocalStorage
+function saveTabData(tabId){
+  const tabContent = document.getElementById(tabId);
+  const inputs = tabContent.querySelectorAll('input[type="text"]');
+  const data = Array.from(inputs).map(input=>input.value);
+  const images = uploadedImages[tabId] || [];
+  localStorage.setItem('tabData_'+tabId, JSON.stringify({data,dataImages:images}));
+}
+
+// تحميل البيانات عند الفتح
+function loadTabData(tabId){
+  const saved = localStorage.getItem('tabData_'+tabId);
+  if(saved){
+    const obj = JSON.parse(saved);
+    const inputs = document.getElementById(tabId).querySelectorAll('input[type="text"]');
+    inputs.forEach((input,i)=>{ input.value = obj.data[i] || ''; });
+    uploadedImages[tabId] = obj.dataImages || [];
+    updatePreview(tabId);
+  }
+}
+
+// استرجاع البيانات لجميع التبويبات عند التحميل
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.tab-content').forEach(tab=>{
+    loadTabData(tab.id);
+  });
 });
 
-// ===== رفع الصور وعرضها مع إمكانية الحذف =====
-const imagesData = {};
-
-function storeImages(event) {
-  const input = event.target;
-  const tab = input.closest('.tab-content');
-  const preview = tab.querySelector('.preview');
-  const counter = tab.querySelector('.counter');
-
-  if (!imagesData[tab.id]) imagesData[tab.id] = [];
-
-  Array.from(input.files).forEach(file => {
-    const reader = new FileReader();
-    reader.onload = e => {
-      const wrapper = document.createElement('div');
-      wrapper.classList.add('img-wrapper');
-
-      const img = document.createElement('img');
-      img.src = e.target.result;
-      wrapper.appendChild(img);
-
-      const delBtn = document.createElement('button');
-      delBtn.textContent = '×';
-      delBtn.onclick = () => {
-        preview.removeChild(wrapper);
-        imagesData[tab.id] = imagesData[tab.id].filter(f => f !== e.target.result);
-        counter.textContent = imagesData[tab.id].length + " صورة";
-      };
-      wrapper.appendChild(delBtn);
-
-      preview.appendChild(wrapper);
-      imagesData[tab.id].push(e.target.result);
-      counter.textContent = imagesData[tab.id].length + " صورة";
-    };
-    reader.readAsDataURL(file);
+// حفظ تلقائي عند تغير أي input
+document.querySelectorAll('input[type="text"]').forEach(input=>{
+  input.addEventListener('input',()=>{
+    const tabId = input.closest('.tab-content').id;
+    saveTabData(tabId);
   });
+});
 
-  input.value = '';
+setTimeout(()=>{
+  document.querySelectorAll('.date').forEach(el=>{
+    flatpickr(el,{ locale:'ar', dateFormat:"d-m-Y", altInput:true, altFormat:"d-m-Y" });
+  });
+},500);
+
+function printPDF(btn){
+  const tabContent = btn.closest('.tab-content');
+  const tabId = tabContent.id;
+  const content = tabContent.cloneNode(true);
+  content.querySelectorAll('button,input[type="file"],.counter,.preview').forEach(el=>el.remove());
+
+  const programInput = content.querySelector('input[type="text"]:nth-of-type(4)');
+  let programName = programInput ? programInput.value : '';
+  if(programName){
+    const titleEl = document.createElement('div');
+    titleEl.textContent = programName;
+    titleEl.style.fontSize = "24px";
+    titleEl.style.fontWeight = "bold";
+    titleEl.style.textAlign = "center";
+    titleEl.style.marginBottom = "10px";
+    content.insertBefore(titleEl, content.firstChild);
+  }
+
+  const wrapper = document.createElement('div');
+  wrapper.style.position='relative';
+  wrapper.style.width='210mm';
+  wrapper.style.height='296.5mm';
+  wrapper.style.padding='60mm 10mm 20mm 10mm';
+  wrapper.style.boxSizing='border-box';
+  wrapper.style.overflow='hidden';
+  wrapper.style.backgroundImage = 'url("images/background.png")';
+  wrapper.style.backgroundSize = 'cover';
+  wrapper.style.backgroundRepeat = 'no-repeat';
+  wrapper.style.backgroundPosition = 'center';
+  wrapper.appendChild(content);
+
+  const tabImages = uploadedImages[tabId] || [];
+  if (tabImages.length > 0) {
+    const imagesWrapper = document.createElement('div');
+    imagesWrapper.style.display = 'flex';
+    imagesWrapper.style.flexWrap = 'wrap';
+    imagesWrapper.style.justifyContent = 'center';
+    imagesWrapper.style.gap = '5px';
+    imagesWrapper.style.margin = '15px 0';
+    tabImages.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.style.width = '150px';
+      img.style.height = '150px';
+      img.style.objectFit = 'cover';
+      imagesWrapper.appendChild(img);
+    });
+    const activityDiv = Array.from(content.querySelectorAll('div'))
+      .find(div => div.innerHTML.includes('رائدة النشاط'));
+    if (activityDiv) { content.insertBefore(imagesWrapper, activityDiv); }
+  }
+
+  html2pdf().set({
+    margin:0,
+    filename: tabId+'-report.pdf',
+    image:{type:'jpeg',quality:0.95},
+    html2canvas:{scale:3, useCORS:true, backgroundColor:null},
+    jsPDF:{unit:'mm', format:'a4', orientation:'portrait'}
+  }).from(wrapper).save();
 }
 
-// ===== دالة الطباعة لكل تبويب مع الخلفية واسم الملف تلقائي =====
-function printPDF(button) {
-  const tab = button.closest('.tab-content');
-  const container = tab.cloneNode(true);
-  container.style.display = 'block';
-  container.style.backgroundImage = "url('images/background.png')";
-  container.style.backgroundSize = "cover";
-  container.style.backgroundRepeat = "no-repeat";
-  container.style.padding = "20px";
-
-  // اسم التبويب لاستخدامه في اسم الملف
-  const tabNameLabel = tab.querySelector('label');
-  let tabName = tabNameLabel ? tabNameLabel.textContent.trim() : tab.id;
-  tabName = tabName.replace(/\s+/g, "_"); // استبدال الفراغات بـ "_"
-
-  const opt = {
-    margin:       0.5,
-    filename:     `تقرير_${tabName}.pdf`,
-    image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  { scale: 2, logging: false, useCORS: true },
-    jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-  };
-
-  html2pdf().set(opt).from(container).save();
-}
+// زر حذف البيانات أسفل زر الطباعة لكل تبويب
+document.querySelectorAll('.tab-content').forEach(tab=>{
+  const delBtn = document.createElement('button');
+  delBtn.textContent = 'حذف البيانات';
+  delBtn.style.background = 'red';
+  delBtn.style.color = 'white';
+  delBtn.style.marginTop = '5px';
+  delBtn.addEventListener('click',()=>{
+    if(confirm('هل أنت متأكد من حذف جميع البيانات؟')){
+      const inputs = tab.querySelectorAll('input[type="text"]');
+      inputs.forEach(input=>input.value='');
+      localStorage.removeItem('tabData_'+tab.id);
+      uploadedImages[tab.id] = [];
+      updatePreview(tab.id);
+    }
+  });
+  const printBtn = tab.querySelector('button');
+  printBtn.insertAdjacentElement('afterend', delBtn);
+});
 </script>
 </body>
 </html>
