@@ -96,7 +96,7 @@ footer { text-align:center; padding:10px; color:#333; font-weight:bold; font-siz
   <div class="preview" style="display:flex; gap:5px; flex-wrap:wrap; margin-top:5px;"></div>
   <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:5px; margin-top:10px;">
     <div><label>رائدة النشاط</label><input type="text"></div>
-    <div><label>مديرة المدرسة</label><input type="text"></div>
+    <div><label>مديرةة المدرسة</label><input type="text"></div>
   </div>
   <button onclick="printPDF(this)">طباعة التقرير</button>
 </div>
@@ -136,7 +136,7 @@ footer { text-align:center; padding:10px; color:#333; font-weight:bold; font-siz
   <div class="preview" style="display:flex; gap:5px; flex-wrap:wrap; margin-top:5px;"></div>
   <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:5px; margin-top:10px;">
     <div><label>رائدة النشاط</label><input type="text"></div>
-    <div><label>مديرة المدرسة</label><input type="text"></div>
+    <div><label>مديرةة المدرسة</label><input type="text"></div>
   </div>
   <button onclick="printPDF(this)">طباعة التقرير</button>
 </div>
@@ -176,7 +176,7 @@ footer { text-align:center; padding:10px; color:#333; font-weight:bold; font-siz
   <div class="preview" style="display:flex; gap:5px; flex-wrap:wrap; margin-top:5px;"></div>
   <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:5px; margin-top:10px;">
     <div><label>رائدة النشاط</label><input type="text"></div>
-    <div><label>مديرة المدرسة</label><input type="text"></div>
+    <div><label>مديرةة المدرسة</label><input type="text"></div>
   </div>
   <button onclick="printPDF(this)">طباعة التقرير</button>
 </div>
@@ -216,7 +216,7 @@ footer { text-align:center; padding:10px; color:#333; font-weight:bold; font-siz
   <div class="preview" style="display:flex; gap:5px; flex-wrap:wrap; margin-top:5px;"></div>
   <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:5px; margin-top:10px;">
     <div><label>رائدة النشاط</label><input type="text"></div>
-    <div><label>مديرة المدرسة</label><input type="text"></div>
+    <div><label>مديرةة المدرسة</label><input type="text"></div>
   </div>
   <button onclick="printPDF(this)">طباعة التقرير</button>
 </div>
@@ -256,7 +256,7 @@ footer { text-align:center; padding:10px; color:#333; font-weight:bold; font-siz
   <div class="preview" style="display:flex; gap:5px; flex-wrap:wrap; margin-top:5px;"></div>
   <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:5px; margin-top:10px;">
     <div><label>رائدة النشاط</label><input type="text"></div>
-    <div><label>مديرة المدرسة</label><input type="text"></div>
+    <div><label>مديرةة المدرسة</label><input type="text"></div>
   </div>
   <button onclick="printPDF(this)">طباعة التقرير</button>
 </div>
@@ -296,7 +296,7 @@ footer { text-align:center; padding:10px; color:#333; font-weight:bold; font-siz
   <div class="preview" style="display:flex; gap:5px; flex-wrap:wrap; margin-top:5px;"></div>
   <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:5px; margin-top:10px;">
     <div><label>رائدة النشاط</label><input type="text"></div>
-    <div><label>مديرة المدرسة</label><input type="text"></div>
+    <div><label>مديرةة المدرسة</label><input type="text"></div>
   </div>
   <button onclick="printPDF(this)">طباعة التقرير</button>
 </div>
@@ -480,6 +480,7 @@ function printPDF(btn){
 }
 
 // زر حذف البيانات أسفل زر الطباعة لكل تبويب
+// زر حذف البيانات أسفل زر الطباعة لكل تبويب
 document.querySelectorAll('.tab-content').forEach(tab=>{
   const delBtn = document.createElement('button');
   delBtn.textContent = 'حذف البيانات';
@@ -493,6 +494,9 @@ document.querySelectorAll('.tab-content').forEach(tab=>{
       localStorage.removeItem('tabData_'+tab.id);
       uploadedImages[tab.id] = [];
       updatePreview(tab.id);
+      // تصفير عداد الصور
+      const counter = tab.querySelector('.counter');
+      if(counter) counter.textContent = '';
     }
   });
   const printBtn = tab.querySelector('button');
