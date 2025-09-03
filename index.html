@@ -415,7 +415,6 @@ document.querySelectorAll('.tab-content').forEach(tab => {
   clearBtn.onclick = () => {
     tab.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
     localStorage.removeItem(tab.id + '-inputs');
-    // مسح الصور أيضا
     tab.querySelector('.preview').innerHTML = '';
     tab.querySelector('.counter').textContent = '';
   };
@@ -438,7 +437,7 @@ function storeImages(event) {
     reader.onload = e => {
       const wrapper = document.createElement('div');
       wrapper.classList.add('img-wrapper');
-      
+
       const img = document.createElement('img');
       img.src = e.target.result;
       wrapper.appendChild(img);
@@ -459,8 +458,33 @@ function storeImages(event) {
     reader.readAsDataURL(file);
   });
 
-  // إعادة تعيين input
   input.value = '';
+}
+
+// ===== دالة الطباعة لكل تبويب مع الخلفية واسم الملف تلقائي =====
+function printPDF(button) {
+  const tab = button.closest('.tab-content');
+  const container = tab.cloneNode(true);
+  container.style.display = 'block';
+  container.style.backgroundImage = "url('images/background.png')";
+  container.style.backgroundSize = "cover";
+  container.style.backgroundRepeat = "no-repeat";
+  container.style.padding = "20px";
+
+  // اسم التبويب لاستخدامه في اسم الملف
+  const tabNameLabel = tab.querySelector('label');
+  let tabName = tabNameLabel ? tabNameLabel.textContent.trim() : tab.id;
+  tabName = tabName.replace(/\s+/g, "_"); // استبدال الفراغات بـ "_"
+
+  const opt = {
+    margin:       0.5,
+    filename:     `تقرير_${tabName}.pdf`,
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2, logging: false, useCORS: true },
+    jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(container).save();
 }
 </script>
 </body>
